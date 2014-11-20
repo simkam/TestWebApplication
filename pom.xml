@@ -45,6 +45,7 @@
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
+        <jboss.dist/>
     </properties>
 
 
@@ -116,6 +117,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.2.5</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- JSR-303 (Bean Validation) Implementation -->
         <!-- Provides portable constraints such as @Email -->
         <!-- Hibernate Validator is shipped in JBoss EAP 6 -->
@@ -138,6 +146,14 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>javax</groupId>
@@ -230,6 +246,9 @@
                         <version>${version.surefire.plugin}</version>
                         <configuration>
                             <skip>false</skip>
+                            <systemPropertyVariables>
+                                <jboss.dist>${jboss.dist}</jboss.dist>
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                 </plugins>

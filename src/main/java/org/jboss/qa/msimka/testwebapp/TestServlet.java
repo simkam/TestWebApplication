@@ -34,7 +34,6 @@ public class TestServlet extends HttpServlet {
                 .setNamingStrategyDelegator(delegator)
                 .setProperty("hibernate.connection.datasource", "java:jboss/datasources/ExampleDS")
                 .configure().buildSessionFactory();
-
         Session session = sessionFactory.openSession();
 //        Query q = session.createQuery("SELECT p.parts.id FROM prod p");
 //        q.list();
