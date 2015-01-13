@@ -16,16 +16,45 @@
     limitations under the License.
 -->
 <persistence version="2.0"
-   xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="
+             xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="
         http://java.sun.com/xml/ns/persistence
         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-   <!--<persistence-unit name="primary">-->
-     <!--<jta-data-source>java:jboss/datasources/TestDatasource</jta-data-source>-->
-      <!--<properties>-->
-         <!--&lt;!&ndash; Properties for Hibernate &ndash;&gt;-->
-         <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->
-         <!--<property name="hibernate.show_sql" value="true" />-->
-      <!--</properties>-->
-   <!--</persistence-unit>-->
+    <persistence-unit name="primary">
+        <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+        <class>org.jboss.qa.msimka.TestEntity</class>
+        <class>org.jboss.qa.msimka.ChildEntity</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <!--&lt;!&ndash; Properties for Hibernate &ndash;&gt;-->
+            <!--<property name="hibernate.hbm2ddl.auto" value="create-drop"/>-->
+            <!--<property name="hibernate.show_sql" value="true"/>-->
+            <!--<property name="hibernate.cache.use_second_level_cache" value="true"/>-->
+            <!--<property name="hibernate.cache.use_query_cache" value="true"/>-->
+
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.id.optimizer.pooled.prefer_lo" value="true"/>
+            <property name="hibernate.id.new_generator_mappings" value="true"/>
+            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>-->
+            <property name="hibernate.order_inserts" value="true"/>
+            <!--		<property name="hibernate.order_updates" value="true"/>-->
+            <property name="hibernate.default_batch_fetch_size" value="200"/>
+            <property name="hibernate.jdbc.fetch_size" value="256"/>
+            <property name="hibernate.jdbc.batch_size" value="24"/>
+            <property name="hibernate.archive.autodetection" value="true"/>
+            <property name="hibernate.cache.infinispan.statistics" value="false"/>
+            <property name="hibernate.cache.use_query_cache" value="true" />
+            <property name="hibernate.cache.use_second_level_cache" value="true"/>
+            <property name="hibernate.cache.use_minimal_puts" value="true"/>
+            <property name="hibernate.cache.infinispan.entity.expiration.lifespan" value="1200000"/>
+            <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
+            <property name="hibernate.cache.use_minimal_puts" value="true"/>
+            <property name="hibernate.cache.use_reference_entries" value="true"/>
+
+            <property name="hibernate.ejb.classcache.org.jboss.qa.msimka.TestEntity" value="read-only"/>
+            <!--<property name="hibernate.ejb.use_class_enhancer" value="true"/>-->
+
+        </properties>
+    </persistence-unit>
 </persistence>

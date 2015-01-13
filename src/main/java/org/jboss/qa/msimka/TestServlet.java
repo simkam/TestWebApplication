@@ -1,6 +1,7 @@
 package org.jboss.qa.msimka;
 
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -20,23 +21,11 @@ import java.io.IOException;
 @WebServlet(name = "TestServlet", urlPatterns = {"/TestServlet"})
 public class TestServlet extends HttpServlet {
 
-    @Resource(mappedName = "java:/MyMail")
-    private Session session;
+    @EJB
+    private TestBean testBean;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            Store store = session.getStore();
-            store.connect();
-            Folder inbox = store.getFolder("INBOX");
-            inbox.open(Folder.READ_ONLY);
-                Message msg = inbox.getMessage(inbox.getMessageCount());
-                System.out.println(msg.getSubject());
-            resp.getWriter().print(msg.getSubject());
-        } catch (NoSuchProviderException e) {
-            throw new ServletException(e);
-        } catch (MessagingException e) {
-            throw new ServletException(e);
-        }
+        testBean.test();
     }
 }
