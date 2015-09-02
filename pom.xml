@@ -192,7 +192,8 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <archive>
                         <manifestEntries>
-                            <Dependencies>org.hibernate</Dependencies>
+                            <!--<Dependencies>com.oracle.ucp,org.jboss.ironjacamar.impl,org.jboss.ironjacamar.jdbcadapters,org.jboss.as.connector</Dependencies>-->
+                            <Dependencies>com.oracle.ucp</Dependencies>
                         </manifestEntries>
                     </archive>
                 </configuration>
