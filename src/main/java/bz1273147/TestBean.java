@@ -15,9 +15,8 @@ public class TestBean {
     @PersistenceContext(unitName = "primary")
     private EntityManager em;
 
-    public int saveNewEntity(String text) {
-        TestEntity t = new TestEntity();
-        t.setText(text);
+    public int saveNewEntity(int version, String text) {
+        TestEntity t = new TestEntity(version, text);
         em.persist(t);
         return t.getId();
     }
@@ -32,9 +31,15 @@ public class TestBean {
         return em.find(TestEntity.class, id);
     }
 
-    public void changeText(int id, String text) {
+    public void changeVersion(int id, int version) {
         TestEntity e = em.find(TestEntity.class, id);
-        e.setText(text);
+        e.setVersion(version);
+        em.merge(e);
+    }
+
+    public void changeText(int id, String newText) {
+        TestEntity e = em.find(TestEntity.class, id);
+        e.setText(newText);
         em.merge(e);
     }
 }

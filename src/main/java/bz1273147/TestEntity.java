@@ -14,7 +14,18 @@ public class TestEntity {
 
     @Column
     @Version
+    private int version;
+
+    @Column
     private String text;
+
+    public TestEntity() {
+    }
+
+    public TestEntity(int version, String text) {
+        this.version = version;
+        this.text = text;
+    }
 
     public Integer getId() {
         return id;
@@ -22,6 +33,14 @@ public class TestEntity {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     public String getText() {

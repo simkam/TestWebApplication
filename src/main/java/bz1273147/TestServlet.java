@@ -28,13 +28,18 @@ public class TestServlet extends HttpServlet {
         out.println("Action: " + action);
         if(action != null) {
             if (action.equalsIgnoreCase("new")) {
+                String version = request.getParameter("version");
                 String text = request.getParameter("text");
+                out.println("Version: " + version);
                 out.println("Text: " + text);
+                if(version == null) {
+                    throw new ServletException("version is null");
+                }
                 if(text == null) {
                     throw new ServletException("text is null");
                 }
-                int id = bean.saveNewEntity(text);
-                out.println("saved new entity with text: " + text + ", id: " + id);
+                int id = bean.saveNewEntity(Integer.parseInt(version), text);
+                out.println("saved new entity with version: " + version + ", text: " + text + ", id: " + id);
 
             } else if(action.equalsIgnoreCase("findAll")) {
                 List<TestEntity> all = bean.findAll();
@@ -42,7 +47,7 @@ public class TestServlet extends HttpServlet {
                     out.println("no entities found");
                 } else {
                     for (TestEntity e : all) {
-                        out.println("id: " + e.getId() + ", text: " + e.getText());
+                        out.println("id: " + e.getId() + ", version: " + e.getVersion() + ", text: " + e.getText());
                     }
                 }
             } else if(action.equalsIgnoreCase("findById")) {
@@ -52,8 +57,20 @@ public class TestServlet extends HttpServlet {
                 }
                 out.println("id: " + id);
                 TestEntity entity = bean.findById(Integer.parseInt(id));
-                out.println("id: " + entity.getId() + ", text: " + entity.getText());
-            } else if(action.equalsIgnoreCase("change")) {
+                out.println("id: " + entity.getId() + ", version: " + entity.getVersion() + ", text: " + entity.getText());
+            } else if(action.equalsIgnoreCase("changeVersion")) {
+                String id = request.getParameter("id");
+                if(id == null) {
+                    throw new ServletException("id is null");
+                }
+                String version = request.getParameter("version");
+                if(version == null) {
+                    throw new ServletException("version is null");
+                }
+                out.println("id: " + id);
+                out.println("version: " + version);
+                bean.changeVersion(Integer.parseInt(id), Integer.parseInt(version));
+            } else if(action.equalsIgnoreCase("changeText")) {
                 String id = request.getParameter("id");
                 if(id == null) {
                     throw new ServletException("id is null");
