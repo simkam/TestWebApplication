@@ -82,6 +82,18 @@ public class TestServlet extends HttpServlet {
                 out.println("id: " + id);
                 out.println("text: " + text);
                 bean.changeText(Integer.parseInt(id), text);
+            } else if(action.equalsIgnoreCase("changeText2")) {
+                String id = request.getParameter("id");
+                if(id == null) {
+                    throw new ServletException("id is null");
+                }
+                String text = request.getParameter("text");
+                if(text == null) {
+                    throw new ServletException("text is null");
+                }
+                out.println("id: " + id);
+                out.println("text: " + text);
+                bean.changeText(Integer.parseInt(id), text);
             }
         }
     }

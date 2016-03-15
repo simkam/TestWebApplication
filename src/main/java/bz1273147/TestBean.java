@@ -42,4 +42,10 @@ public class TestBean {
         e.setText(newText);
         em.merge(e);
     }
+
+    public void changeText2(int id, String newText) {
+        TestEntity e = em.find(TestEntity.class, id);
+        e.setText(newText);
+        em.merge(e);
+    }
 }
