@@ -1,10 +1,27 @@
 package bz1273147;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedStoredProcedureQuery;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureParameter;
 
 /**
  * @author <a href="mailto:msimka@redhat.com">Martin Simka</a>
  */
+
+@NamedStoredProcedureQuery(name = "TestEntity.findNameById",
+        resultClasses = TestEntity.class,
+        procedureName = "TEST_PROC"
+        ,
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "ID_PARAM", type = Integer.class),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, name = "TEXT_PARAM", type = String.class)
+        }
+)
 @Entity
 public class TestEntity {
 
@@ -13,7 +30,6 @@ public class TestEntity {
     private Integer id;
 
     @Column
-    @Version
     private int version;
 
     @Column
