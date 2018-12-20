@@ -20,4 +20,11 @@ public class TestEntity {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "TestEntity{" +
+                "id=" + id +
+                '}';
+    }
 }

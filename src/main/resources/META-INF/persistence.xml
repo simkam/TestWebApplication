@@ -29,7 +29,7 @@
       </properties>
    </persistence-unit>
     <persistence-unit name="secondary">
-        <jta-data-source>java:jboss/xa-datasources/MariaDBDS</jta-data-source>
+        <jta-data-source>java:jboss/xa-datasources/MariaDBDS2</jta-data-source>
         <properties>
             <!-- Properties for Hibernate -->
             <property name="hibernate.hbm2ddl.auto" value="create-drop" />

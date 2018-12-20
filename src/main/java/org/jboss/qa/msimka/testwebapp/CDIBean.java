@@ -1,6 +1,7 @@
 package org.jboss.qa.msimka.testwebapp;
 
 import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.annotation.Resource;
 import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.enterprise.context.RequestScoped;
@@ -20,13 +21,25 @@ public class CDIBean implements Serializable {
 
     public void test() {
         System.out.println("test");
-        for(int i = 0; i < 1000; i++) {
-            System.out.println("test: " + i);
+        AtomicBoolean first = new AtomicBoolean(true);
+        AtomicBoolean persist = new AtomicBoolean(true);
+        for(int i = 0; i < 40; i++) {
             managedExecutorService.submit(new Runnable() {
                 @Override
                 public void run() {
-                    testBean.test();
-                    secondaryBean.test();
+                    if (first.getAndSet(!first.get())) {
+                        if (persist.getAndSet(!persist.get())) {
+                            testBean.persist();
+                        } else {
+                            testBean.select();
+                        }
+                    } else {
+                        if (persist.getAndSet(!persist.get())) {
+                            secondaryBean.persist();
+                        } else {
+                            secondaryBean.select();
+                        }
+                    }
                 }
             });
         }
