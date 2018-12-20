@@ -85,7 +85,6 @@
                     <target>1.8</target>
                     <excludes>
                         <exclude>**/ChildEntity.java</exclude>
-                        <exclude>**/TestBean.java</exclude>
                         <exclude>**/TestEntity.java</exclude>
                     </excludes>
                 </configuration>

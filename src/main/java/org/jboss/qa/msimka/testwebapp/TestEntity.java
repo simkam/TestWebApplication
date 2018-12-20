@@ -1,14 +1,16 @@
 package org.jboss.qa.msimka.testwebapp;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
  * @author Martin Simka
  */
-//@Entity
+@Entity
 public class TestEntity {
-//    @Id
+    @Id
+    @GeneratedValue
     private Integer id;
 
     public Integer getId() {
